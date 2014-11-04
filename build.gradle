@@ -3,12 +3,14 @@
  * by 'wiley' at '2/11/14 9:16 PM' with Gradle 1.10
  *
  */
-task wrapper(type: Wrapper) {
-    gradleVersion = "2.1"
-}
 
 apply plugin: 'java'
 apply plugin: 'war'
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "1.11"
+}
 
 if (isBuildingBlock()) {
     version = getB2Version()
@@ -30,16 +32,18 @@ dependencies {
 
     compile 'org.slf4j:slf4j-api:1.7.5'
     compile 'org.slf4j:jul-to-slf4j:1.7.5'
-    compile 'org.slf4j:slf4j-simple:1.7.5'    
+    compile 'org.slf4j:slf4j-simple:1.7.5'
 
     compile 'net.sourceforge.stripes:stripes:1.5.7'
     compile 'org.springframework:spring-beans:3.2.5.RELEASE'
-    compile 'org.springframework:spring-web:3.2.5.RELEASE'    
+    compile 'org.springframework:spring-web:3.2.5.RELEASE'
+    compile files('lib/bb-stripes-utils-1.0.jar')
 
     providedCompile 'javax.servlet:servlet-api:2.5'
+    providedCompile 'jstl:jstl:1.2'
     providedCompile 'blackboard.platform:bb-platform:9.1.100401.0'
     providedCompile 'blackboard.platform:bb-taglibs:9.1.100401.0'
-    
+
     testCompile "junit:junit:4.11"
 }
 
@@ -48,19 +52,37 @@ ant.taskdef(name: 'b2deploy', classname: 'org.oscelot.ant.B2DeployTask', classpa
 task deployb2(dependsOn: 'war') << {
     println "Deploying \"" + war.archivePath + "\""
     ant.b2deploy(localfilepath: war.archivePath,
-        host: 'localhost:8081',
-        clean: 'true',
-        courseorgavailable:'true')
+            host: 'localhost:8081',
+            clean: 'true',
+            courseorgavailable: 'true')
 }
 
 
 String getB2Version() {
-  File mfFile = new File(file(webAppDir), 'WEB-INF/bb-manifest.xml');
-  def manifest = new XmlSlurper().parse(mfFile);
-  return manifest.plugin.version['@value'];
+    File mfFile = new File(file(webAppDir), 'WEB-INF/bb-manifest.xml');
+    def manifest = new XmlSlurper().parse(mfFile);
+    return manifest.plugin.version['@value'];
 }
 
 boolean isBuildingBlock() {
-  File mfFile = new File(file(webAppDir), 'WEB-INF/bb-manifest.xml');
-  return mfFile.exists();
+    File mfFile = new File(file(webAppDir), 'WEB-INF/bb-manifest.xml');
+    return mfFile.exists();
+}
+
+
+task initB2 << {
+
+    def console = System.console()
+    if (!console) {
+        logger.error("Can't get console!")
+        return
+    }
+    def vendorId = System.console().readLine '\nWhat is your Vendor Id (e.g. usq, unsw, qut, swin, etc) ?'
+    def handle = System.console().readLine 'What is your B2 Handle (e.g. jshack, autosignon, etc) ?'
+    def basePackage = System.console().readLine 'What is the base java package of your project? (e.g. au.edu.uni.myproject) ?'
+    def useStripes = System.console().readLine 'Do you want to use the Stripes Framework (Y, N)?'
+    def useSpringDi = System.console().readLine 'Do you want to use Spring Beans (Y, N)?'
+    def useJersey = System.console().readLine 'Do you want to use Jersey Web Services (Y, N)?'
+    println "Initialising Building Block $vendorId-$handle"
+
 }

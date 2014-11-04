@@ -5,72 +5,40 @@
 -->
 <manifest>
   <plugin>
-    <name value="jsh.plugin.name"/>
-    <handle value="jshack"/>
-    <description value="jsh.plugin.description"/>
+    <name value="plugin.name"/>
+    <handle value="stub"/>
+    <description value="plugin.description"/>
     <default-locale value="en_GB" />
-    <!-- <webapp-type value="javaext" /> -->
     <version value="1.0"/>
     <requires>
       <bbversion value="9.1"/>
     </requires>
     <vendor>
-      <id value="oslt"/>
-      <name value="Oscelot"/>
-      <url value="http://www.oscelot.org/"/>
-      <description value="Oscelot"/>
+      <id value="myu"/>
+      <name value="My University"/>
+      <url value="http://www.myu.edu/"/>
+      <description value="My University"/>
     </vendor>
     <http-actions>
 
     </http-actions>
 
 
-    <extension-defs>
-      <definition namespace="org.oscelot">
-        <extension id="jshackTagLearningSystemPageStartHook"
-                   point="blackboard.platform.renderingHook"
-                   class="org.oscelot.jshack.hooks.TagLearningSystemPageStartHook"
-                   singleton="true" />
-        <extension id="jshackTagEditModeViewToggleStartHook"
-                   point="blackboard.platform.renderingHook"
-                   class="org.oscelot.jshack.hooks.TagEditModeViewToggleStartHook"
-                   singleton="true" />
-        <extension id="jshackJspTopFrameStartHook"
-                   point="blackboard.platform.renderingHook"
-                   class="org.oscelot.jshack.hooks.JspTopFrameStartHook"
-                   singleton="true" />
-        <extension id="jshackJspFramesetStartHook"
-                   point="blackboard.platform.renderingHook"
-                   class="org.oscelot.jshack.hooks.JspFramesetStartHook"
-                   singleton="true" />
-      </definition>
-    </extension-defs>
 
     <application-defs>
-      <application handle="oslt-jsh-manage-hacks" type="system" name="jsh.plugin.manage.title">
-        <description>jsh.plugin.manage.description</description>
+      <application handle="myapp" type="course" name="plugin.tool.title">
+        <description>plugin.tool.description</description>
         <links>
-          <link>
-            <type value="nav_handle_param" />
-            <navhandle value="pa_ext"/>
-            <name value="jsh.plugin.manage.label" />
-            <url value="ListHacks.action" />
-            <entitlement-uid value="system.jshacks.CREATE" />
-            <description value="jsh.plugin.manage.description" />
-            <icons>
-              <listitem value="" />
-            </icons>
-          </link>
+            <link>
+                <type value="course_tool" />
+                <name value="plugin.link.helloworld.name" />
+                <url value="HelloWorld.action" />
+                <handle value="helloworld" />
+                <description value="plugin.link.helloworld.description" />
+            </link>
         </links>
       </application>
     </application-defs>
-
-    <entitlements>
-      <entitlement uid="system.jshacks.CREATE"
-                   label="jsh.entitlement.CREATE.label"
-                   type="Course"
-                   template="system.plugin.CREATE" />
-    </entitlements>
 
 
     <permissions>
