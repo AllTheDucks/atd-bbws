@@ -7,8 +7,9 @@
 <%@ taglib prefix="bbng" uri="/bbNG" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%--<fmt:message var="groupSynchronisation" key="bond.classgroups.editgroup.groupsynchronisation" />--%>
+<fmt:message var="helloworldMessage" key="myapp.helloworldPage.message" />
 
 
 <bbNG:learningSystemPage ctxId="ctx" navItem="myu-myapp-nav-helloworld">
+    ${helloworldMessage}
 </bbNG:learningSystemPage>

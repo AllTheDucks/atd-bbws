@@ -81,11 +81,11 @@
 
     <context-param>
         <param-name>blackboard.plugin.vendor</param-name>
-        <param-value>oslt</param-value>
+        <param-value>myu</param-value>
     </context-param>
     <context-param>
         <param-name>blackboard.plugin.handle</param-name>
-        <param-value>jshack</param-value>
+        <param-value>stub</param-value>
     </context-param>
 
     <listener>
