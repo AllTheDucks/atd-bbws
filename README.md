@@ -14,7 +14,8 @@ By default it includes
 Creating a new Project
 ------------
 
-1. Get the template project:  ````git clone https://github.com/AllTheDucks/atd-b2-stub.git myproject````
+1. Get the template project:  
+````git clone https://github.com/AllTheDucks/atd-b2-stub.git myproject````  
 where ````myproject```` is the name of your project.
 1. Change into the directory ````cd myproject````
 1. Run the initB2 task and enter all the details: ````gradlew initB2```` 
