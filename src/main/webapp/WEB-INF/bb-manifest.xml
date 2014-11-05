@@ -20,13 +20,13 @@
       <description value="My University"/>
     </vendor>
     <http-actions>
-
+        <config value="Config.action" />
     </http-actions>
 
 
 
     <application-defs>
-      <application handle="myapp" type="course" name="plugin.tool.title">
+      <application handle="myapp" type="shared" name="plugin.tool.title">
         <description>plugin.tool.description</description>
         <links>
             <link>
@@ -36,9 +36,18 @@
                 <handle value="helloworld" />
                 <description value="plugin.link.helloworld.description" />
             </link>
+            <link>
+                <type value="nav_handle_param" />
+                <name value="plugin.link.helloworldconfig.name" />
+                <url value="Config.action" />
+                <navhandle value="admin_plugin_manage"/>
+                <handle value="helloworldconfig" />
+                <description value="plugin.link.helloworldconfig.description" />
+            </link>
         </links>
       </application>
     </application-defs>
+
 
 
     <permissions>
