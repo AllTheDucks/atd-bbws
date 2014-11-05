@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'atd-b2-stub'
+rootProject.name = 'myu-stub'
