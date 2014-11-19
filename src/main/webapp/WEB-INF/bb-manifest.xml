@@ -53,6 +53,7 @@
     <permissions>
       <!-- Stripes Permissions -->
       <permission type="java.lang.RuntimePermission" name="accessDeclaredMembers" />
+      <permission type="java.lang.RuntimePermission" name="modifyThread" />
       <permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
 
       <!-- Other Permissions -->

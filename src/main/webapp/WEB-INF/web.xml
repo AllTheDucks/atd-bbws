@@ -19,7 +19,7 @@
         </init-param>
         <init-param>
             <param-name>ActionBeanContext.Class</param-name>
-            <param-value>org.oscelot.bb.stripes.BlackboardActionBeanContext</param-value>
+            <param-value>com.alltheducks.bb.stripes.BlackboardActionBeanContext</param-value>
         </init-param>
         <init-param>
             <param-name>MultipartWrapper.Class</param-name>
@@ -27,7 +27,7 @@
         </init-param>
         <init-param>
             <param-name>Interceptor.Classes</param-name>
-            <param-value>org.oscelot.bb.stripes.interceptors.BlackboardSecurityInterceptor,
+            <param-value>com.alltheducks.bb.stripes.interceptors.BlackboardSecurityInterceptor,
                 net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
         </init-param>
 
@@ -46,14 +46,20 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-    <!--</listener>-->
-    <!--<context-param>-->
-        <!--<param-name>contextConfigLocation</param-name>-->
-        <!--<param-value>WEB-INF/applicationContext.xml</param-value>-->
-    <!--</context-param>-->
 
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            com.alltheducks.configutils.ConfigMonitoringContextListener
+        </listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>StripesDispatcher</servlet-name>
