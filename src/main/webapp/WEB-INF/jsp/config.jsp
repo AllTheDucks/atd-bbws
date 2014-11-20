@@ -13,15 +13,25 @@
 
 <bbNG:genericPage bodyClass="normalBackground"
                   navItem="myu-myapp-nav-helloworldconfig">
+
+    <style type="text/css">
+        span.fieldErrorText {
+            margin-left: 1em;
+            color: red;
+        }
+    </style>
     <stripes:form beanclass="edu.myinst.stripes.ConfigAction">
         <stripes:hidden name="saveConfiguration"/>
+
         <bbNG:dataCollection>
             <bbNG:step title="${toolSettingsStepTitle}">
                 <bbNG:dataElement isRequired="true" label="${settingOneLabel}">
                     <stripes:text name="config.settingOne"></stripes:text>
+                    <stripes:errors field="config.settingOne"></stripes:errors>
                 </bbNG:dataElement>
                 <bbNG:dataElement isRequired="true" label="${settingTwoLabel}">
                     <stripes:text name="config.settingTwo"></stripes:text>
+                    <stripes:errors field="config.settingTwo"></stripes:errors>
                 </bbNG:dataElement>
             </bbNG:step>
             <bbNG:stepSubmit></bbNG:stepSubmit>

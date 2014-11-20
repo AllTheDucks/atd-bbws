@@ -30,6 +30,10 @@
             <param-value>com.alltheducks.bb.stripes.interceptors.BlackboardSecurityInterceptor,
                 net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
         </init-param>
+        <init-param>
+            <param-name>LocalizationBundleFactory.Class</param-name>
+            <param-value>com.alltheducks.bb.stripes.BbLocalizationBundleFactory</param-value>
+        </init-param>
 
     </filter>
     <filter-mapping>
@@ -93,19 +97,13 @@
         <param-name>blackboard.plugin.handle</param-name>
         <param-value>stub</param-value>
     </context-param>
-
     <listener>
         <listener-class>blackboard.platform.plugin.PluginLocalizationContextListener</listener-class>
     </listener>
+
     <mime-mapping>
         <extension>css</extension>
         <mime-type>text/css</mime-type>
     </mime-mapping>
-
-
-
-    <!--<listener>-->
-        <!--<listener-class>org.oscelot.jshack.service.TempFileServletContextListener</listener-class>-->
-    <!--</listener>-->
 
 </web-app>
