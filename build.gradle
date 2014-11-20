@@ -83,10 +83,10 @@ task initB2 << {
         return
     }
     def vendorId = System.console().readLine '\nWhat is your Vendor Id (e.g. usq, unsw, qut, swin, etc) ? '
-    def vendorName = System.console().readLine 'What is your Vendor Name (e.g. "University of Antarctica") ? '
-    def vendorUrl = System.console().readLine 'What is your Vendor Website (e.g. "http://www.myu.edu.au/") ? '
+    def vendorName = System.console().readLine 'What is your Vendor Name (e.g. University of Antarctica) ? '
+    def vendorUrl = System.console().readLine 'What is your Vendor Website (e.g. http://www.myu.edu.au/) ? '
     def b2Handle = System.console().readLine 'What is your B2 Handle (e.g. jshack, autosignon, etc) ? '
-    def b2Name = System.console().readLine 'What is your B2 Name (e.g. "Student View") ? '
+    def b2Name = System.console().readLine 'What is your B2 Name (e.g. Student View) ? '
     def basePackage = System.console().readLine 'What is the base java package of your project? (e.g. au.edu.uni.myproject) ? '
 //    def useStripes = System.console().readLine 'Do you want to use the Stripes Framework (Y, N)?'
 //    def useSpringDi = System.console().readLine 'Do you want to use Spring Beans (Y, N)?'
@@ -155,6 +155,12 @@ task initB2 << {
     searchAndReplace("src/main/webapp/WEB-INF/applicationContext.xml", "edu.myinst", basePackage)
 
 
+    def command = """git remote rm origin"""
+    def proc = command.execute()
+    proc.waitFor()
+
+    println "${proc.err.text}"
+    println "${proc.in.text}"
 }
 
 def searchAndReplace(String targetFilePath, String search, String replace) {
