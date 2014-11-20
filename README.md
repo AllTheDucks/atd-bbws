@@ -19,6 +19,6 @@ Creating a new Project
 where ````myproject```` is the name of your project.
 1. Change into the project directory: ````cd myproject````
 1. Run the initB2 task and enter all the details: ````gradlew initB2```` 
-1. Change the git repository for your new project: ````git remote set-url origin <git url>````
+1. Add a remote for your new git project.: ````git remote add origin <git url>````
 
 **DONE !**
