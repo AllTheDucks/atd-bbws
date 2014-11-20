@@ -4,69 +4,86 @@
     Copyright My University,  2014.
 -->
 <manifest>
-  <plugin>
-    <name value="plugin.name"/>
-    <handle value="stub"/>
-    <description value="plugin.description"/>
-    <default-locale value="en_GB" />
-    <version value="1.0"/>
-    <requires>
-      <bbversion value="9.1"/>
-    </requires>
-    <vendor>
-      <id value="myu"/>
-      <name value="My University"/>
-      <url value="http://www.myu.edu/"/>
-      <description value="My University"/>
-    </vendor>
-    <http-actions>
-        <config value="Config.action" />
-    </http-actions>
+    <plugin>
+        <name value="plugin.name"/>
+        <handle value="stub"/>
+        <description value="plugin.description"/>
+        <default-locale value="en_GB"/>
+        <version value="1.0"/>
+        <requires>
+            <bbversion value="9.1"/>
+        </requires>
+        <vendor>
+            <id value="myu"/>
+            <name value="My University"/>
+            <url value="http://www.myu.edu/"/>
+            <description value="My University"/>
+        </vendor>
+        <http-actions>
+            <config value="Config.action"/>
+        </http-actions>
 
 
 
-    <application-defs>
-      <application handle="myapp" type="shared" name="plugin.tool.title">
-        <description>plugin.tool.description</description>
-        <links>
-            <link>
-                <type value="course_tool" />
-                <name value="plugin.link.helloworld.name" />
-                <url value="Tool.action" />
-                <handle value="helloworld" />
-                <description value="plugin.link.helloworld.description" />
-            </link>
-            <link>
-                <type value="nav_handle_param" />
-                <name value="plugin.link.helloworldconfig.name" />
-                <url value="Config.action" />
-                <navhandle value="admin_plugin_manage"/>
-                <handle value="helloworldconfig" />
-                <description value="plugin.link.helloworldconfig.description" />
-            </link>
-        </links>
-      </application>
-    </application-defs>
+        <application-defs>
+            <application handle="myapp" type="shared" name="plugin.tool.title">
+                <description>plugin.tool.description</description>
+                <links>
+                    <link>
+                        <type value="course_tool"/>
+                        <name value="plugin.link.helloworld.name"/>
+                        <url value="Tool.action"/>
+                        <handle value="helloworld"/>
+                        <description
+                                value="plugin.link.helloworld.description"/>
+                    </link>
+                    <link>
+                        <type value="nav_handle_param"/>
+                        <name value="plugin.link.helloworldconfig.name"/>
+                        <url value="Config.action"/>
+                        <navhandle value="admin_plugin_manage"/>
+                        <handle value="helloworldconfig"/>
+                        <description
+                                value="plugin.link.helloworldconfig.description"/>
+                    </link>
+                </links>
+            </application>
+        </application-defs>
 
+        <entitlements>
+            <entitlement uid="myu.stub.admin.MODIFY"
+                         label="myu.stub.entitlement.system"
+                         type="System"
+                         template="system.plugin.MODIFY"/>
+        </entitlements>
 
+        <permissions>
+            <!-- Stripes Permissions -->
+            <permission type="java.lang.RuntimePermission"
+                        name="accessDeclaredMembers"/>
+            <permission type="java.lang.RuntimePermission" name="modifyThread"/>
+            <permission type="java.lang.reflect.ReflectPermission"
+                        name="suppressAccessChecks"/>
 
-    <permissions>
-      <!-- Stripes Permissions -->
-      <permission type="java.lang.RuntimePermission" name="accessDeclaredMembers" />
-      <permission type="java.lang.RuntimePermission" name="modifyThread" />
-      <permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
+            <!-- Other Permissions -->
 
-      <!-- Other Permissions -->
+            <permission type="java.util.logging.LoggingPermission"
+                        name="control"/>
 
-      <permission type="java.util.logging.LoggingPermission" name="control"/>
-
-      <permission type="blackboard.data.AttributePermission" name="user.authinfo" actions="get" />
-      <permission type="blackboard.data.AttributePermission" name="user.personalinfo" actions="get" />
-      <permission type="blackboard.data.AttributePermission" name="user.cardnumber" actions="get" />
-      <permission type="blackboard.persist.PersistPermission" name="userlifecycleeventimpl" actions="get" />
-      <permission type="blackboard.persist.PersistPermission" name="userlifecycleeventpropertyimpl" actions="get" />
-      <permission type="blackboard.persist.PersistPermission" name="user" actions="get" />
-      <permission type="java.lang.RuntimePermission" name="createClassLoader" />
-    </permissions>
-  </plugin>
+            <permission type="blackboard.data.AttributePermission"
+                        name="user.authinfo" actions="get"/>
+            <permission type="blackboard.data.AttributePermission"
+                        name="user.personalinfo" actions="get"/>
+            <permission type="blackboard.data.AttributePermission"
+                        name="user.cardnumber" actions="get"/>
+            <permission type="blackboard.persist.PersistPermission"
+                        name="userlifecycleeventimpl" actions="get"/>
+            <permission type="blackboard.persist.PersistPermission"
+                        name="userlifecycleeventpropertyimpl" actions="get"/>
+            <permission type="blackboard.persist.PersistPermission" name="user"
+                        actions="get"/>
+            <permission type="java.lang.RuntimePermission"
+                        name="createClassLoader"/>
+        </permissions>
+    </plugin>
 </manifest>

@@ -46,8 +46,8 @@ dependencies {
 
     providedCompile 'javax.servlet:servlet-api:2.5'
     providedCompile 'jstl:jstl:1.2'
-    providedCompile 'blackboard.platform:bb-platform:9.1.100401.0'
-    providedCompile 'blackboard.platform:bb-taglibs:9.1.100401.0'
+    providedCompile 'blackboard.platform:bb-platform:9.1.201404.160205'
+    providedCompile 'blackboard.platform:bb-taglibs:9.1.201404.160205'
 
     testCompile "junit:junit:4.11"
 }
@@ -133,6 +133,8 @@ task initB2 << {
     searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "Hello World", b2Name)
     searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "helloworld", b2Handle)
     searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "myapp", "${b2Handle}-app")
+    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "myu", vendorId)
+    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "stub", b2Handle)
 
     searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "myu", vendorId)
     searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "helloworld", b2Handle)
