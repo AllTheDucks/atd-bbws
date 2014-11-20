@@ -137,10 +137,13 @@ task initB2 << {
     searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "myu", vendorId)
     searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "helloworld", b2Handle)
     searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "myapp", "${b2Handle}-app")
+    searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "edu.myinst", basePackage)
 
     searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "myu", vendorId)
     searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "helloworld", b2Handle)
     searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "myapp", "${b2Handle}-app")
+    searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "edu.myinst", basePackage)
+
 
     searchAndReplace("settings.gradle", "myu", vendorId)
     searchAndReplace("settings.gradle", "stub", b2Handle)
