@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Author     : Joe Bloggs
-    Copyright My University,  2014.
+    Author     : wiley
+    Copyright All the Ducks Pty Ltd,  2014.
 -->
 <manifest>
     <plugin>
         <name value="plugin.name"/>
-        <handle value="stub"/>
+        <handle value="bbws"/>
         <description value="plugin.description"/>
         <default-locale value="en_GB"/>
         <version value="1.0"/>
@@ -14,10 +14,10 @@
             <bbversion value="9.1"/>
         </requires>
         <vendor>
-            <id value="myu"/>
-            <name value="My University"/>
-            <url value="http://www.myu.edu/"/>
-            <description value="My University"/>
+            <id value="atd"/>
+            <name value="All the Ducks Pty Ltd"/>
+            <url value="http://www.atd.edu/"/>
+            <description value="All the Ducks Pty Ltd"/>
         </vendor>
         <http-actions>
             <config value="Config.action"/>
@@ -26,33 +26,33 @@
 
 
         <application-defs>
-            <application handle="myapp" type="shared" name="plugin.tool.title">
+            <application handle="bbws-app" type="shared" name="plugin.tool.title">
                 <description>plugin.tool.description</description>
                 <links>
                     <link>
                         <type value="course_tool"/>
-                        <name value="plugin.link.helloworld.name"/>
+                        <name value="plugin.link.bbws.name"/>
                         <url value="Tool.action"/>
-                        <handle value="helloworld"/>
+                        <handle value="bbws"/>
                         <description
-                                value="plugin.link.helloworld.description"/>
+                                value="plugin.link.bbws.description"/>
                     </link>
                     <link>
                         <type value="nav_handle_param"/>
-                        <name value="plugin.link.helloworldconfig.name"/>
+                        <name value="plugin.link.bbwsconfig.name"/>
                         <url value="Config.action"/>
                         <navhandle value="admin_plugin_manage"/>
-                        <handle value="helloworldconfig"/>
+                        <handle value="bbwsconfig"/>
                         <description
-                                value="plugin.link.helloworldconfig.description"/>
+                                value="plugin.link.bbwsconfig.description"/>
                     </link>
                 </links>
             </application>
         </application-defs>
 
         <entitlements>
-            <entitlement uid="myu.stub.admin.MODIFY"
-                         label="myu.stub.entitlement.system"
+            <entitlement uid="atd.bbws.admin.MODIFY"
+                         label="atd.bbws.entitlement.system"
                          type="System"
                          template="system.plugin.MODIFY"/>
         </entitlements>

@@ -13,8 +13,8 @@
 
     <bean id="configDir" class="blackboard.platform.plugin.PlugInUtil"
           factory-method="getConfigDirectory">
-        <constructor-arg name="vid" value="myu"/>
-        <constructor-arg name="handle" value="stub"/>
+        <constructor-arg name="vid" value="atd"/>
+        <constructor-arg name="handle" value="bbws"/>
     </bean>
 
     <bean id="configFile" class="java.io.File">

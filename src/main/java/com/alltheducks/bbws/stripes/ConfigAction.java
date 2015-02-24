@@ -1,7 +1,7 @@
-package edu.myinst.stripes;
+package com.alltheducks.bbws.stripes;
 
 import blackboard.platform.plugin.PlugInUtil;
-import edu.myinst.config.Configuration;
+import com.alltheducks.bbws.config.Configuration;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import com.alltheducks.configutils.*;

@@ -1,4 +1,4 @@
-package edu.myinst.config;
+package com.alltheducks.bbws.config;
 
 import net.sourceforge.stripes.validation.Validate;
 

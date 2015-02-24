@@ -7,12 +7,12 @@
 <%@ taglib prefix="bbng" uri="/bbNG" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<fmt:message var="toolSettingsStepTitle" key="myapp.configPage.toolSettingsStep.title" />
-<fmt:message var="settingOneLabel" key="myapp.configPage.settingOne.label" />
-<fmt:message var="settingTwoLabel" key="myapp.configPage.settingTwo.label" />
+<fmt:message var="toolSettingsStepTitle" key="bbws-app.configPage.toolSettingsStep.title" />
+<fmt:message var="settingOneLabel" key="bbws-app.configPage.settingOne.label" />
+<fmt:message var="settingTwoLabel" key="bbws-app.configPage.settingTwo.label" />
 
 <bbNG:genericPage bodyClass="normalBackground"
-                  navItem="myu-myapp-nav-helloworldconfig">
+                  navItem="atd-bbws-app-nav-bbwsconfig">
 
     <style type="text/css">
         span.fieldErrorText {
@@ -20,7 +20,7 @@
             color: red;
         }
     </style>
-    <stripes:form beanclass="edu.myinst.stripes.ConfigAction">
+    <stripes:form beanclass="com.alltheducks.bbws.stripes.ConfigAction">
         <stripes:hidden name="saveConfiguration"/>
 
         <bbNG:dataCollection>

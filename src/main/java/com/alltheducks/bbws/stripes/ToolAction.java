@@ -1,4 +1,4 @@
-package edu.myinst.stripes;
+package com.alltheducks.bbws.stripes;
 
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
