@@ -40,26 +40,29 @@
     <!-- Blackboard Beans -->
     <bean id="userDbLoader"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
-          factory-method="getUserDbLoader"/>
+          factory-method="getUserDbLoader" />
 
     <bean id="courseMembershipDbLoader"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
-          factory-method="getCourseMembershipDbLoader"/>
+          factory-method="getCourseMembershipDbLoader" />
 
     <bean id="bbConfigurationService"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
-          factory-method="getBbConfigurationService"/>
+          factory-method="getBbConfigurationService" />
 
     <bean id="courseRoleDbLoader"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
-          factory-method="getCourseRoleDbLoader"/>
+          factory-method="getCourseRoleDbLoader" />
 
     <bean id="courseDbLoader"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
-          factory-method="getCourseDbLoader"/>
+          factory-method="getCourseDbLoader" />
 
     <bean id="bundleManager"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
-          factory-method="getBundleManagerEx"/>
+          factory-method="getBundleManagerEx" />
 
+    <bean id="gradableItemDAO"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getGradableItemDAO" />
 </beans>

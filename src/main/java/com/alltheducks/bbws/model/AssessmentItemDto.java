@@ -7,9 +7,10 @@ import org.slf4j.LoggerFactory;
  * Created by Wiley Fuller on 4/03/15.
  * Copyright All the Ducks Pty. Ltd.
  */
-public class AssessmentItem {
+public class AssessmentItemDto {
     private String title;
     private String type;
+    private double pointsPossible;
 
     public String getTitle() {
         return title;
@@ -25,5 +26,13 @@ public class AssessmentItem {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public double getPointsPossible() {
+        return pointsPossible;
+    }
+
+    public void setPointsPossible(double pointsPossible) {
+        this.pointsPossible = pointsPossible;
     }
 }
