@@ -35,4 +35,31 @@
         <constructor-arg name="configurationService" ref="configurationService"/>
         <constructor-arg name="pollFreq" value="10"/>
     </bean>
+
+
+    <!-- Blackboard Beans -->
+    <bean id="userDbLoader"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getUserDbLoader"/>
+
+    <bean id="courseMembershipDbLoader"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getCourseMembershipDbLoader"/>
+
+    <bean id="bbConfigurationService"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getBbConfigurationService"/>
+
+    <bean id="courseRoleDbLoader"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getCourseRoleDbLoader"/>
+
+    <bean id="courseDbLoader"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getCourseDbLoader"/>
+
+    <bean id="bundleManager"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getBundleManagerEx"/>
+
 </beans>

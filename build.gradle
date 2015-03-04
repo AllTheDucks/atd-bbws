@@ -44,7 +44,13 @@ dependencies {
     compile files('lib/bb-stripes-utils-1.1.0.jar')
     compile files('lib/b2-config-utils-1.0.jar')
 
-    providedCompile 'javax.servlet:servlet-api:2.5'
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.16'
+    compile 'org.glassfish.hk2:spring-bridge:2.3.0'
+
+
+    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.5.1'
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
     providedCompile 'jstl:jstl:1.2'
     providedCompile 'blackboard.platform:bb-platform:9.1.201404.160205'
     providedCompile 'blackboard.platform:bb-taglibs:9.1.201404.160205'

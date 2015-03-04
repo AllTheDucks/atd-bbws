@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
     <session-config>
         <session-timeout>
-      30
-    </session-timeout>
+            30
+        </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -12,27 +16,36 @@
     <filter>
         <display-name>Stripes Filter</display-name>
         <filter-name>StripesFilter</filter-name>
-        <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+        <filter-class>net.sourceforge.stripes.controller.StripesFilter
+        </filter-class>
         <init-param>
             <param-name>ActionResolver.Packages</param-name>
             <param-value>com.alltheducks.bbws.stripes</param-value>
         </init-param>
         <init-param>
             <param-name>ActionBeanContext.Class</param-name>
-            <param-value>com.alltheducks.bb.stripes.BlackboardActionBeanContext</param-value>
+            <param-value>
+                com.alltheducks.bb.stripes.BlackboardActionBeanContext
+            </param-value>
         </init-param>
         <init-param>
             <param-name>MultipartWrapper.Class</param-name>
-            <param-value>net.sourceforge.stripes.controller.multipart.CommonsMultipartWrapper</param-value>
+            <param-value>
+                net.sourceforge.stripes.controller.multipart.CommonsMultipartWrapper
+            </param-value>
         </init-param>
         <init-param>
             <param-name>Interceptor.Classes</param-name>
-            <param-value>com.alltheducks.bb.stripes.interceptors.BlackboardSecurityInterceptor,
-                net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
+            <param-value>
+                com.alltheducks.bb.stripes.interceptors.BlackboardSecurityInterceptor,
+                net.sourceforge.stripes.integration.spring.SpringInterceptor
+            </param-value>
         </init-param>
         <init-param>
             <param-name>LocalizationBundleFactory.Class</param-name>
-            <param-value>com.alltheducks.bb.stripes.BbLocalizationBundleFactory</param-value>
+            <param-value>
+                com.alltheducks.bb.stripes.BbLocalizationBundleFactory
+            </param-value>
         </init-param>
 
     </filter>
@@ -52,7 +65,8 @@
     </filter-mapping>
 
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
     </listener>
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -67,27 +81,25 @@
 
     <servlet>
         <servlet-name>StripesDispatcher</servlet-name>
-        <servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+        <servlet-class>net.sourceforge.stripes.controller.DispatcherServlet
+        </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!--<servlet>-->
-        <!--<servlet-name>JerseyEndpoint</servlet-name>-->
-        <!--<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>jersey.config.server.provider.packages</param-name>-->
-            <!--<param-value>org.oscelot.jshack.ws</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>JerseyEndpoint</servlet-name>-->
-        <!--<url-pattern>/ws/*</url-pattern>-->
-    <!--</servlet-mapping>-->
+
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>*.action</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>com.alltheducks.bbws.ws.BbWebServiceApplication</servlet-name>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>com.alltheducks.bbws.ws.BbWebServiceApplication</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>
 
     <context-param>
         <param-name>blackboard.plugin.vendor</param-name>
@@ -98,7 +110,9 @@
         <param-value>bbws</param-value>
     </context-param>
     <listener>
-        <listener-class>blackboard.platform.plugin.PluginLocalizationContextListener</listener-class>
+        <listener-class>
+            blackboard.platform.plugin.PluginLocalizationContextListener
+        </listener-class>
     </listener>
 
     <mime-mapping>
