@@ -42,7 +42,7 @@ dependencies {
     compile 'org.springframework:spring-beans:3.2.5.RELEASE'
     compile 'org.springframework:spring-web:3.2.5.RELEASE'
     compile files('lib/bb-stripes-utils-1.1.0.jar')
-    compile files('lib/b2-config-utils-1.0.jar')
+    compile files('lib/b2-config-utils-1.0.2.jar')
 
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.16'
     compile 'org.glassfish.hk2:spring-bridge:2.3.0'

@@ -2,6 +2,7 @@ package com.alltheducks.bbws.stripes;
 
 import blackboard.platform.plugin.PlugInUtil;
 import com.alltheducks.bbws.config.Configuration;
+import com.alltheducks.configutils.service.ConfigurationService;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import com.alltheducks.configutils.*;

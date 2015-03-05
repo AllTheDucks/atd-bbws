@@ -1,7 +1,7 @@
 package com.alltheducks.bbws.security;
 
 import com.alltheducks.bbws.config.Configuration;
-import com.alltheducks.configutils.ConfigurationService;
+import com.alltheducks.configutils.service.ConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
