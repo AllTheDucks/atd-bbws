@@ -1,4 +1,4 @@
-Blackboard Gradebook REST Web Service Building Block
+Blackboard Gradebook REST Web Service B2
 ===================
 
 This building block provides easy access to the Blackboard Gradebook via a REST
@@ -16,6 +16,21 @@ All request paths must begin with
 
 `BBLEARN` may be replaced with `bb_bb60` if your Bb installation has
 been upgraded from an old (pre 9.1) version.
+
+
+Authentication
+--------------
+All requests require credentials passed using HTTP Basic Auth. In curl this would look
+like the following.
+````
+curl -u username:password https://yourbbinstall.edu/blah/blah/blah
+````
+
+**Basic Auth credentials are *NOT* encrypted. Make sure all your requests are
+performed over https**
+
+Before you start using the WebService, you must configure a username and password
+on the Building Block settings page.
 
 
 Actions
