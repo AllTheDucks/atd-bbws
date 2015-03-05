@@ -16,8 +16,8 @@ public class ConfigAction implements ActionBean {
 
     private ActionBeanContext context;
 
-    @ValidateNestedProperties({@Validate(field = "settingOne", required = true),
-            @Validate(field = "settingTwo", required = true, minvalue = 0, maxvalue = 100)})
+    @ValidateNestedProperties({@Validate(field = "username", required = true),
+            @Validate(field = "password", required = true, minvalue = 0, maxvalue = 100)})
     private Configuration config;
 
     @SpringBean

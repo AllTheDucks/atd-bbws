@@ -65,4 +65,12 @@
     <bean id="gradableItemDAO"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
           factory-method="getGradableItemDAO" />
+
+    <bean id="gradingSchemaDAO"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getGradingSchemaDAO" />
+
+    <bean id="gradeDetailDAO"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getGradeDetailDAO" />
 </beans>

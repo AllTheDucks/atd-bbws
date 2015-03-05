@@ -1,6 +1,7 @@
 package com.alltheducks.bbws.ws;
 
 import blackboard.persist.course.CourseDbLoader;
+import com.alltheducks.bbws.security.BasicAuthFeature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -36,8 +37,9 @@ public class BbWebServiceApplication extends ResourceConfig {
         springBridge.bridgeSpringBeanFactory(springContext);
 
 
-        packages("com.alltheducks.bbws.ws");
+        packages("com.alltheducks.bbws.ws;com.alltheducks.bbws.security");
         register(JacksonJsonProvider.class);
+        register(BasicAuthFeature.class);
 
         logger.info("Started BbWebServiceApplication.");
     }

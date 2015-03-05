@@ -8,8 +8,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <fmt:message var="toolSettingsStepTitle" key="bbws-app.configPage.toolSettingsStep.title" />
-<fmt:message var="settingOneLabel" key="bbws-app.configPage.settingOne.label" />
-<fmt:message var="settingTwoLabel" key="bbws-app.configPage.settingTwo.label" />
+<fmt:message var="usernameSettingLabel" key="bbws-app.configPage.usernameSetting.label" />
+<fmt:message var="passwordSettingLabel" key="bbws-app.configPage.usernameSetting.label" />
 
 <bbNG:genericPage bodyClass="normalBackground"
                   navItem="atd-bbws-app-nav-bbwsconfig">
@@ -25,13 +25,13 @@
 
         <bbNG:dataCollection>
             <bbNG:step title="${toolSettingsStepTitle}">
-                <bbNG:dataElement isRequired="true" label="${settingOneLabel}">
-                    <stripes:text name="config.settingOne"></stripes:text>
-                    <stripes:errors field="config.settingOne"></stripes:errors>
+                <bbNG:dataElement isRequired="true" label="${usernameSettingLabel}">
+                    <stripes:text name="config.username"></stripes:text>
+                    <stripes:errors field="config.username"></stripes:errors>
                 </bbNG:dataElement>
-                <bbNG:dataElement isRequired="true" label="${settingTwoLabel}">
-                    <stripes:text name="config.settingTwo"></stripes:text>
-                    <stripes:errors field="config.settingTwo"></stripes:errors>
+                <bbNG:dataElement isRequired="true" label="${passwordSettingLabel}">
+                    <stripes:text name="config.password"></stripes:text>
+                    <stripes:errors field="config.password"></stripes:errors>
                 </bbNG:dataElement>
             </bbNG:step>
             <bbNG:stepSubmit></bbNG:stepSubmit>

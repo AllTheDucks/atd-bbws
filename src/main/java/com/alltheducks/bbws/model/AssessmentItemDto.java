@@ -8,9 +8,18 @@ import org.slf4j.LoggerFactory;
  * Copyright All the Ducks Pty. Ltd.
  */
 public class AssessmentItemDto {
+    private String id;
     private String title;
-    private String type;
+    private Type type;
     private double pointsPossible;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -20,11 +29,11 @@ public class AssessmentItemDto {
         this.title = title;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -35,4 +44,12 @@ public class AssessmentItemDto {
     public void setPointsPossible(double pointsPossible) {
         this.pointsPossible = pointsPossible;
     }
+
+    public enum Type {
+        TEXT,
+        NUMBER,
+        PERCENT,
+        DATE
+    }
 }
+

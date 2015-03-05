@@ -24,7 +24,7 @@ Actions
 The following actions are available:
 
 
-### Get All Courses (for user???)
+### Get All Courses
 
 **GET** `/courses`
 
@@ -33,4 +33,23 @@ curl Example
 curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses
 ````
 
+### Get a single Course
 
+**GET** `/courses/{courseId}`
+* `courseId` is the value stored in the `COURSE_ID` column in the DB.
+
+curl Example
+```` shell
+curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_course
+````
+
+
+### Get all Assessments for a course
+
+**GET** `/courses/{courseId}/gradebook/assessments`
+* `courseId` is the value stored in the `COURSE_ID` column in the DB.
+
+curl Example
+```` shell
+curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_course/gradebook/assessments
+````
