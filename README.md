@@ -4,7 +4,7 @@ Blackboard Gradebook REST Web Service B2
 This building block provides easy access to the Blackboard Gradebook via a REST
   Web Service.
 
-**Currently under development.  More documentation will be added later.**
+**Currently under development. YMMV**
 
 
 Web Service Usage

@@ -22,18 +22,18 @@
         <constructor-arg index="1" value="config.xml" />
     </bean>
 
-    <bean id="configurationService" class="com.alltheducks.configutils.CachingConfigurationService">
+    <bean id="configurationService" class="com.alltheducks.configutils.service.CachingConfigurationService">
         <constructor-arg name="internalConfigurationService">
-            <bean class="com.alltheducks.configutils.XmlConfigurationService">
+            <bean class="com.alltheducks.configutils.service.XmlConfigurationService">
                 <property name="configurationXMLFile" ref="configFile" />
             </bean>
         </constructor-arg>
     </bean>
 
-    <bean id="configurationMonitor" class="com.alltheducks.configutils.PollingConfigurationMonitor">
+    <bean id="configurationMonitor" class="com.alltheducks.configutils.monitor.PollingConfigurationMonitor">
         <constructor-arg name="configurationFile" ref="configFile"/>
         <constructor-arg name="configurationService" ref="configurationService"/>
-        <constructor-arg name="pollFreq" value="10"/>
+        <constructor-arg name="pollFreqSeconds" value="10"/>
     </bean>
 
 

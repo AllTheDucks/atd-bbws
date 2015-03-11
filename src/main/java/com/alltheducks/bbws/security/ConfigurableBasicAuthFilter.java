@@ -21,11 +21,6 @@ public class ConfigurableBasicAuthFilter implements ContainerRequestFilter {
     final Logger logger = LoggerFactory.getLogger(ConfigurableBasicAuthFilter.class);
 
     ConfigurationService<Configuration> configurationService;
-    private final static WebApplicationException unauthorized =
-            new WebApplicationException(
-                    Response.status(Response.Status.UNAUTHORIZED)
-                            .header(HttpHeaders.WWW_AUTHENTICATE, "Basic realm=\"realm\"")
-                            .entity("Resource requires Authentication.").build());
 
 
     public ConfigurableBasicAuthFilter(ConfigurationService<Configuration> configurationService) {
@@ -36,7 +31,7 @@ public class ConfigurableBasicAuthFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         Configuration config = configurationService.loadConfiguration();
         if (config == null) {
-            throw unauthorized;
+            throw buildAuthException();
         }
 
         String expectedUsername = config.getUsername();
@@ -44,28 +39,38 @@ public class ConfigurableBasicAuthFilter implements ContainerRequestFilter {
 
         if (expectedUsername == null || expectedUsername.isEmpty() ||
                 expectedPassword == null || expectedPassword.isEmpty()) {
-            throw unauthorized;
+            throw buildAuthException();
         }
 
         String authHeader = requestContext.getHeaderString("Authorization");
 
         if (authHeader == null) {
-            throw unauthorized;
+            throw buildAuthException();
         }
 
         String[] usernamePassword = decode(authHeader);
         if (usernamePassword == null || usernamePassword.length != 2) {
-            throw unauthorized;
+            throw buildAuthException();
         }
 
         String username = usernamePassword[0];
         String password = usernamePassword[1];
 
         if (!(username.equals(expectedUsername) && password.equals(expectedPassword))) {
-            throw unauthorized;
+            throw buildAuthException();
         }
 
 
+    }
+
+    private WebApplicationException buildAuthException() {
+        WebApplicationException unauthorized =
+                new WebApplicationException(
+                        Response.status(Response.Status.UNAUTHORIZED)
+                                .header(HttpHeaders.WWW_AUTHENTICATE, "Basic realm=\"realm\"")
+                                .entity("Resource requires Authentication.").build());
+
+        return unauthorized;
     }
 
     public static String[] decode(String auth) {

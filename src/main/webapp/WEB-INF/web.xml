@@ -75,7 +75,7 @@
 
     <listener>
         <listener-class>
-            com.alltheducks.configutils.ConfigMonitoringContextListener
+            com.alltheducks.configutils.servlet.SpringBeanConfigMonitoringContextListener
         </listener-class>
     </listener>
 
