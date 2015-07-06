@@ -6,6 +6,19 @@ This building block provides easy access to the Blackboard Gradebook via a REST
 
 **Currently under development. YMMV**
 
+Building
+----------
+To build this project, clone the project to a local directory ````cd```` to the directory, then run the following command for unix/osx.
+````
+./gradlew build
+````
+or, for windows.
+````
+gradlew.bat build
+````
+
+You can find the building block war file in the ````build/libs```` directory.
+
 
 Web Service Usage
 -----------
