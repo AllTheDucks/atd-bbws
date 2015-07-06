@@ -9,7 +9,7 @@
         <handle value="bbws"/>
         <description value="plugin.description"/>
         <default-locale value="en_GB"/>
-        <version value="0.1"/>
+        <version value="0.1.1"/>
         <requires>
             <bbversion value="9.1"/>
         </requires>

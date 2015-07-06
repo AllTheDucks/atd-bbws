@@ -25,7 +25,7 @@
     <bean id="configurationService" class="com.alltheducks.configutils.service.CachingConfigurationService">
         <constructor-arg name="internalConfigurationService">
             <bean class="com.alltheducks.configutils.service.XmlConfigurationService">
-                <property name="configurationXMLFile" ref="configFile" />
+                <constructor-arg name="configurationXmlFile" ref="configFile" />
             </bean>
         </constructor-arg>
     </bean>

@@ -37,12 +37,12 @@ dependencies {
     compile 'org.slf4j:jul-to-slf4j:1.7.5'
     compile 'org.slf4j:slf4j-log4j12:1.7.5'
 
-    compile 'com.thoughtworks.xstream:xstream:1.4.4'
+    compile 'com.thoughtworks.xstream:xstream:1.4.7'
     compile 'net.sourceforge.stripes:stripes:1.5.7'
     compile 'org.springframework:spring-beans:3.2.5.RELEASE'
     compile 'org.springframework:spring-web:3.2.5.RELEASE'
     compile files('lib/bb-stripes-utils-1.1.0.jar')
-    compile files('lib/b2-config-utils-1.0.2.jar')
+    compile files('lib/b2-config-utils-1.0.3.jar')
 
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.16'
     compile 'org.glassfish.hk2:spring-bridge:2.3.0'
@@ -63,7 +63,7 @@ ant.taskdef(name: 'b2deploy', classname: 'org.oscelot.ant.B2DeployTask', classpa
 task deployb2(dependsOn: 'war') << {
     println "Deploying \"" + war.archivePath + "\""
     ant.b2deploy(localfilepath: war.archivePath,
-            host: 'localhost:8081',
+            host: 'localhost:9876',
             clean: 'true',
             courseorgavailable: 'true')
 }
@@ -80,108 +80,3 @@ boolean isBuildingBlock() {
     return mfFile.exists();
 }
 
-
-task initB2 << {
-
-    def console = System.console()
-    if (!console) {
-        logger.error("Can't get console!")
-        return
-    }
-    def vendorId = System.console().readLine '\nWhat is your Vendor Id (e.g. usq, unsw, qut, swin, etc) ? '
-    def vendorName = System.console().readLine 'What is your Vendor Name (e.g. University of Antarctica) ? '
-    def vendorUrl = System.console().readLine 'What is your Vendor Website (e.g. http://www.myu.edu.au/) ? '
-    def b2Handle = System.console().readLine 'What is your B2 Handle (e.g. jshack, autosignon, etc) ? '
-    def b2Name = System.console().readLine 'What is your B2 Name (e.g. Student View) ? '
-    def basePackage = System.console().readLine 'What is the base java package of your project? (e.g. au.edu.uni.myproject) ? '
-//    def useStripes = System.console().readLine 'Do you want to use the Stripes Framework (Y, N)?'
-//    def useSpringDi = System.console().readLine 'Do you want to use Spring Beans (Y, N)?'
-//    def useJersey = System.console().readLine 'Do you want to use Jersey Web Services (Y, N)?'
-
-    println "Initialising Building Block $vendorId-$b2Handle"
-
-    // Fix packages in java files
-    def packagePath = basePackage.replace(".", File.separator)
-    def destPackageDir = new File("src/main/java", packagePath)
-    def srcPackageDir = new File("src/main/java/edu/myinst")
-    destPackageDir.mkdirs();
-
-
-    for (srcDir in srcPackageDir.listFiles()) {
-        if (srcDir.isDirectory()) {
-            def destDir = new File(destPackageDir, srcDir.getName())
-            destDir.mkdir()
-            for (srcFile in srcDir.listFiles()) {
-                new File(destDir, srcFile.getName()).withWriter { w ->
-                    srcFile.eachLine { line ->
-                        w << line.replaceAll( "edu.myinst", basePackage)
-                        w << "\n"
-                    }
-                }
-            }
-        }
-    }
-
-    new File("src/main/java/edu").deleteDir();
-
-    // Fix up bb-manifest.xml
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "myu", vendorId)
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "stub", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "My University", vendorName)
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "http://www.myu.edu/", vendorUrl)
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "Joe Bloggs", System.getProperty("user.name"))
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "helloworld", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/bb-manifest.xml", "myapp", "${b2Handle}-app")
-
-
-
-    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "My Cool Building Block", b2Name)
-    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "Hello World", b2Name)
-    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "helloworld", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "myapp", "${b2Handle}-app")
-    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "myu", vendorId)
-    searchAndReplace("src/main/webapp/WEB-INF/bundles/bb-manifest-en_GB.properties", "stub", b2Handle)
-
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "myu", vendorId)
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "helloworld", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "myapp", "${b2Handle}-app")
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/tool.jsp", "edu.myinst", basePackage)
-
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "myu", vendorId)
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "helloworld", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "myapp", "${b2Handle}-app")
-    searchAndReplace("src/main/webapp/WEB-INF/jsp/config.jsp", "edu.myinst", basePackage)
-
-
-    searchAndReplace("settings.gradle", "myu", vendorId)
-    searchAndReplace("settings.gradle", "stub", b2Handle)
-
-    searchAndReplace("src/main/webapp/WEB-INF/web.xml", "myu", vendorId)
-    searchAndReplace("src/main/webapp/WEB-INF/web.xml", "stub", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/web.xml", "edu.myinst", basePackage)
-
-
-    searchAndReplace("src/main/webapp/WEB-INF/applicationContext.xml", "myu", vendorId)
-    searchAndReplace("src/main/webapp/WEB-INF/applicationContext.xml", "stub", b2Handle)
-    searchAndReplace("src/main/webapp/WEB-INF/applicationContext.xml", "edu.myinst", basePackage)
-
-
-    def command = """git remote rm origin"""
-    def proc = command.execute()
-    proc.waitFor()
-
-    println "${proc.err.text}"
-    println "${proc.in.text}"
-}
-
-def searchAndReplace(String targetFilePath, String search, String replace) {
-    new File("${targetFilePath}.tmp").withWriter { w ->
-        new File(targetFilePath).eachLine { line ->
-            w << line.replaceAll( search, replace)
-            w << "\n"
-        }
-    }
-    Files.delete(Paths.get(targetFilePath))
-    Files.move(Paths.get("${targetFilePath}.tmp"),
-            Paths.get(targetFilePath));
-}
