@@ -10,6 +10,8 @@ import java.nio.file.Paths
 apply plugin: 'java'
 apply plugin: 'war'
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 task wrapper(type: Wrapper) {
     gradleVersion = "1.11"

@@ -73,4 +73,8 @@
     <bean id="gradeDetailDAO"
           class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
           factory-method="getGradeDetailDAO" />
+
+    <bean id="courseCourseDbLoader"
+          class="com.alltheducks.bbws.dao.BbDbLoaderFactory"
+          factory-method="getCourseCourseDbLoader" />
 </beans>

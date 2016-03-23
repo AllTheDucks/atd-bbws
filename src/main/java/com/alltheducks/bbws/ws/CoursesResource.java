@@ -1,10 +1,12 @@
 package com.alltheducks.bbws.ws;
 
 import blackboard.data.course.Course;
+import blackboard.data.course.CourseCourse;
 import blackboard.data.user.User;
 import blackboard.persist.Id;
 import blackboard.persist.KeyNotFoundException;
 import blackboard.persist.PersistenceException;
+import blackboard.persist.course.CourseCourseDbLoader;
 import blackboard.persist.course.CourseDbLoader;
 import blackboard.persist.user.UserDbLoader;
 import blackboard.platform.gradebook2.*;
@@ -30,6 +32,7 @@ public class CoursesResource {
 
     @Inject
     private CourseDbLoader courseDbLoader;
+
     @Inject
     private GradableItemDAO gradableItemDAO;
     @Inject
@@ -38,6 +41,9 @@ public class CoursesResource {
     private UserDbLoader userDbLoader;
     @Inject
     private GradeDetailDAO gradeDetailDAO;
+
+    @Inject
+    private CourseCourseDbLoader courseCourseDbLoader;
 
 
     @GET
@@ -63,7 +69,17 @@ public class CoursesResource {
 
         try {
             Course bbCourse = courseDbLoader.loadByCourseId(courseId);
+            List<CourseCourse> children = courseCourseDbLoader.loadByParentId(bbCourse.getId());
             course = convertBbCourseToCourseDto(bbCourse);
+            if (children != null && !children.isEmpty()) {
+                course.setChildren(new ArrayList<CourseDto>());
+                for (CourseCourse childCc : children) {
+                    Course childBbCourse = courseDbLoader.loadById(childCc.getChildCourseId());
+                    CourseDto childCourse = convertBbCourseToCourseDto(childBbCourse);
+                    course.getChildren().add(childCourse);
+                }
+            }
+
         } catch (KeyNotFoundException ex) {
             logger.debug(String.format("No Course with CourseId {} found.", courseId));
             throw new WebApplicationException(String.format("No Course with CourseId %s found.", courseId), 404);
@@ -139,17 +155,11 @@ public class CoursesResource {
 
             //TODO Check that the gradableItem actually belongs to this course.
             GradableItem gradableItem = gradableItemDAO.loadById(assessmentId);
+            if (!courseId.equals(gradableItem.getCourseId())) {
+                throw new WebApplicationException("Invalid IDs in request.", 400);
+            }
 
 
-//            assessmentItem = convertGradableItemToAssessmentDto(gradableItem);
-
-//            GradebookManagerImpl gm = new GradebookManagerImpl(false);
-
-//            GradeManager gm = new GradeManagerImpl(false);
-//            List<GradeWithAttemptScore> grades = gm.getGradesForItem(gradableItem.getId(), false);
-//            for (GradeWithAttemptScore grade : grades) {
-//                grade.get
-//            }
 
             List<GradeDetail> grades = gradeDetailDAO.getGradeDetails(gradableItem.getId());
             for (GradeDetail grade : grades) {

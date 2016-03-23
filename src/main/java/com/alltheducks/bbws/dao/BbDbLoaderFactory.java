@@ -1,6 +1,7 @@
 package com.alltheducks.bbws.dao;
 
 import blackboard.persist.PersistenceException;
+import blackboard.persist.course.CourseCourseDbLoader;
 import blackboard.persist.course.CourseDbLoader;
 import blackboard.persist.course.CourseMembershipDbLoader;
 import blackboard.persist.user.UserDbLoader;
@@ -52,5 +53,9 @@ public class BbDbLoaderFactory {
 
     public static GradeDetailDAO getGradeDetailDAO() {
         return GradeDetailDAO.get();
+    }
+
+    public static CourseCourseDbLoader getCourseCourseDbLoader() throws PersistenceException {
+        return CourseCourseDbLoader.Default.getInstance();
     }
 }
