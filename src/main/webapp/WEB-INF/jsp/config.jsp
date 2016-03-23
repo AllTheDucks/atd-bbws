@@ -9,7 +9,7 @@
 
 <fmt:message var="toolSettingsStepTitle" key="bbws-app.configPage.toolSettingsStep.title" />
 <fmt:message var="usernameSettingLabel" key="bbws-app.configPage.usernameSetting.label" />
-<fmt:message var="passwordSettingLabel" key="bbws-app.configPage.usernameSetting.label" />
+<fmt:message var="passwordSettingLabel" key="bbws-app.configPage.passwordSetting.label" />
 
 <bbNG:genericPage bodyClass="normalBackground"
                   navItem="atd-bbws-app-nav-bbwsconfig">
