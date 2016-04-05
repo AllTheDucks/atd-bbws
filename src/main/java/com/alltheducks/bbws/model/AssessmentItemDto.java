@@ -1,16 +1,14 @@
 package com.alltheducks.bbws.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Created by Wiley Fuller on 4/03/15.
  * Copyright All the Ducks Pty. Ltd.
  */
 public class AssessmentItemDto {
     private String id;
-    private String title;
-    private Type type;
+    private String name;
+    private String internalName;
+    private ValueType valueType;
     private double pointsPossible;
 
     public String getId() {
@@ -21,20 +19,28 @@ public class AssessmentItemDto {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Type getType() {
-        return type;
+    public String getInternalName() {
+        return internalName;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setInternalName(String internalName) {
+        this.internalName = internalName;
+    }
+
+    public ValueType getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(ValueType valueType) {
+        this.valueType = valueType;
     }
 
     public double getPointsPossible() {
@@ -45,7 +51,7 @@ public class AssessmentItemDto {
         this.pointsPossible = pointsPossible;
     }
 
-    public enum Type {
+    public enum ValueType {
         TEXT,
         NUMBER,
         PERCENT,

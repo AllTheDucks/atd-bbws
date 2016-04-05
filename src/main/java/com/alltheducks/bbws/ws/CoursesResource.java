@@ -11,7 +11,6 @@ import blackboard.persist.course.CourseDbLoader;
 import blackboard.persist.user.UserDbLoader;
 import blackboard.platform.gradebook2.*;
 import blackboard.platform.gradebook2.impl.*;
-import blackboard.util.GradeFormat;
 import com.alltheducks.bbws.model.AssessmentItemDto;
 import com.alltheducks.bbws.model.CourseDto;
 import com.alltheducks.bbws.model.MarkDto;
@@ -197,7 +196,8 @@ public class CoursesResource {
     private AssessmentItemDto convertGradableItemToAssessmentDto(GradableItem item) throws PersistenceException {
         AssessmentItemDto assessmentItem = new AssessmentItemDto();
         assessmentItem.setId(item.getId().getExternalString());
-        assessmentItem.setTitle(item.getTitle());
+        assessmentItem.setName(item.getDisplayTitle());
+        assessmentItem.setInternalName(item.getTitle());
         assessmentItem.setPointsPossible(item.getPoints());
 
         GradingSchema schema = gradingSchemaDAO.loadById(item.getGradingSchemaId());
@@ -205,11 +205,11 @@ public class CoursesResource {
 
         logger.debug("Gradable item type is: {}", bbType);
         if (bbType == BaseGradingSchema.Type.SCORE) {
-            assessmentItem.setType(AssessmentItemDto.Type.NUMBER);
+            assessmentItem.setValueType(AssessmentItemDto.ValueType.NUMBER);
         } else if (bbType == BaseGradingSchema.Type.PERCENT) {
-            assessmentItem.setType(AssessmentItemDto.Type.PERCENT);
+            assessmentItem.setValueType(AssessmentItemDto.ValueType.PERCENT);
         } else if (bbType == BaseGradingSchema.Type.TEXT) {
-            assessmentItem.setType(AssessmentItemDto.Type.TEXT);
+            assessmentItem.setValueType(AssessmentItemDto.ValueType.TEXT);
         }
         return assessmentItem;
     }
