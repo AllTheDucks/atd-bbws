@@ -199,6 +199,7 @@ public class CoursesResource {
         assessmentItem.setName(item.getDisplayTitle());
         assessmentItem.setInternalName(item.getTitle());
         assessmentItem.setPointsPossible(item.getPoints());
+        assessmentItem.setUserCreatedAssessment(item.isUserCreatedColumn());
 
         GradingSchema schema = gradingSchemaDAO.loadById(item.getGradingSchemaId());
         GradingSchema.Type bbType = schema.getScaleType();

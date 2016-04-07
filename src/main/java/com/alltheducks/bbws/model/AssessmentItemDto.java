@@ -10,6 +10,7 @@ public class AssessmentItemDto {
     private String internalName;
     private ValueType valueType;
     private double pointsPossible;
+    private boolean userCreatedAssessment;
 
     public String getId() {
         return id;
@@ -49,6 +50,14 @@ public class AssessmentItemDto {
 
     public void setPointsPossible(double pointsPossible) {
         this.pointsPossible = pointsPossible;
+    }
+
+    public boolean isUserCreatedAssessment() {
+        return userCreatedAssessment;
+    }
+
+    public void setUserCreatedAssessment(boolean userCreatedAssessment) {
+        this.userCreatedAssessment = userCreatedAssessment;
     }
 
     public enum ValueType {

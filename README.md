@@ -57,9 +57,34 @@ The following actions are available:
 
 **GET** `/courses`
 
-curl Example
+#### curl Example
 ```` shell
 curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses
+````
+
+#### Example Response
+Example truncated for clarity.
+
+```` json
+[
+    {
+        "children": null,
+        "courseId": "MECM10005_2015_SM1_DOO_1",
+        "externalId": "MECM10005_2015_SM1_DOO_1",
+        "id": "_26_1",
+        "title": "Academic Writing and Communication"
+    },
+    {
+        "children": null,
+        "courseId": "MECM10005_2015_SM2_DOO_1",
+        "externalId": "MECM10005_2015_SM2_DOO_1",
+        "id": "_27_1",
+        "title": "Academic Writing and Communication"
+    }
+
+    ...
+
+}
 ````
 
 ### Get a single Course
@@ -71,7 +96,34 @@ curl Example
 ```` shell
 curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_course
 ````
+#### Example Response
 
+```` json
+{
+    "children": [
+        {
+            "children": null,
+            "courseId": "2016_161_ECON77-102_RBNA_67893",
+            "externalId": "2016_161_LAWS77-102_RBNA_67893",
+            "id": "_57_1",
+            "title": "Foundations of Economics"
+        },
+        {
+            "children": null,
+            "courseId": "2016_161_ECON10-102_RBNA_67892",
+            "externalId": "2016_161_LAWS10-102_RBNA_67892",
+            "id": "_56_1",
+            "title": "Foundations of Economics"
+        }
+    ],
+    "courseId": "2016_161_ECON13-102_RBNA_67891",
+    "externalId": "2016_161_LAWS13-102_RBNA_67891",
+    "id": "_55_1",
+    "title": "Foundations of Economics"
+}
+
+
+````
 
 ### Get all Assessments for a course
 
@@ -82,7 +134,36 @@ curl Example
 ```` shell
 curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_course/gradebook/assessments
 ````
+#### Example Response
 
+```` json
+[
+    {
+        "id": "_110_1",
+        "internalName": "Weighted Total",
+        "name": null,
+        "pointsPossible": 0.0,
+        "userCreatedAssessment": false,
+        "valueType": "PERCENT"
+    },
+    {
+        "id": "_109_1",
+        "internalName": "Total",
+        "name": null,
+        "pointsPossible": 0.0,
+        "userCreatedAssessment": false,
+        "valueType": "NUMBER"
+    },
+    {
+        "id": "_115_1",
+        "internalName": "Assignment One",
+        "name": "Assignment One",
+        "pointsPossible": 25.0,
+        "userCreatedAssessment": true,
+        "valueType": "NUMBER"
+    }
+}
+````
 ### Get a single Assessment for a course
 
 **GET** `/courses/{courseId}/gradebook/assessments/{assessmentId}`
@@ -92,6 +173,19 @@ curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_cours
 curl Example
 ```` shell
 curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_course/gradebook/assessments/_123_1
+````
+
+#### Example Response
+
+```` json
+{
+    "id": "_117_1",
+    "internalName": "Final Exam",
+    "name": "Final Exam",
+    "pointsPossible": 50.0,
+    "userCreatedAssessment": true,
+    "valueType": "NUMBER"
+}
 ````
 
 ### Get all Marks for a single Assessment for a course
