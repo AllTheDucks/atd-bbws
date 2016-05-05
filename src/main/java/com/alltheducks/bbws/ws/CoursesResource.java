@@ -15,6 +15,7 @@ import com.alltheducks.bbws.model.AssessmentItemDto;
 import com.alltheducks.bbws.model.CourseDto;
 import com.alltheducks.bbws.model.MarkDto;
 import com.alltheducks.bbws.security.RequiresAuthentication;
+import com.alltheducks.bbws.util.BbCourseHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +52,7 @@ public class CoursesResource {
         List<CourseDto> courses = new ArrayList<CourseDto>();
         try {
             List<Course> bbCourses = courseDbLoader.loadAllCourses();
-            courses = convertBbCoursesToCourseDtos(bbCourses);
+            courses = BbCourseHelper.convertBbCoursesToCourseDtos(bbCourses);
         } catch (PersistenceException ex) {
             logger.error("Error while retrieving courses", ex);
             throw new WebApplicationException("Error retrieving Courses", 500);
@@ -69,12 +70,12 @@ public class CoursesResource {
         try {
             Course bbCourse = courseDbLoader.loadByCourseId(courseId);
             List<CourseCourse> children = courseCourseDbLoader.loadByParentId(bbCourse.getId());
-            course = convertBbCourseToCourseDto(bbCourse);
+            course = BbCourseHelper.convertBbCourseToCourseDto(bbCourse);
             if (children != null && !children.isEmpty()) {
                 course.setChildren(new ArrayList<CourseDto>());
                 for (CourseCourse childCc : children) {
                     Course childBbCourse = courseDbLoader.loadById(childCc.getChildCourseId());
-                    CourseDto childCourse = convertBbCourseToCourseDto(childBbCourse);
+                    CourseDto childCourse = BbCourseHelper.convertBbCourseToCourseDto(childBbCourse);
                     course.getChildren().add(childCourse);
                 }
             }
@@ -213,22 +214,5 @@ public class CoursesResource {
             assessmentItem.setValueType(AssessmentItemDto.ValueType.TEXT);
         }
         return assessmentItem;
-    }
-
-    private List<CourseDto> convertBbCoursesToCourseDtos(List<Course> bbCourses) {
-        List<CourseDto> courses = new ArrayList<>();
-        for (Course bbCourse : bbCourses) {
-            courses.add(convertBbCourseToCourseDto(bbCourse));
-        }
-        return courses;
-    }
-
-    private CourseDto convertBbCourseToCourseDto(Course bbCourse) {
-        CourseDto course = new CourseDto();
-        course.setId(bbCourse.getId().getExternalString());
-        course.setTitle(bbCourse.getTitle());
-        course.setExternalId(bbCourse.getBatchUid());
-        course.setCourseId(bbCourse.getCourseId());
-        return course;
     }
 }

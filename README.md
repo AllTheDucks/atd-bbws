@@ -198,3 +198,35 @@ curl Example
 ```` shell
 curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_course/gradebook/assessments/_123_1/marks
 ````
+
+
+### Get all Courses for a User
+
+**GET** `/users/{username}/courses`
+* `username` is the value stored in the `USER_ID` column in the DB.
+
+curl Example
+```` shell
+curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/users/administrator/courses
+````
+
+#### Example Response
+
+```` json
+[
+  {
+    "id": "_202_1",
+    "courseId": "2016_161_ECON77-102_RBNA_67893",
+    "externalId": "2016_161_LAWS77-102_RBNA_67893",
+    "title": "Foundations of Economics",
+    "children": null
+  },
+  {
+    "id": "_224_1",
+    "courseId": "2016_161_ENGL31-102_GWAB_14239",
+    "externalId": "2016_161_ENGL31-102_GWAB_14239",
+    "title": "Academic Writing and Communication",
+    "children": null
+  }
+]
+````
