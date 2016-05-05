@@ -5,15 +5,15 @@ import blackboard.data.user.User;
 import blackboard.persist.Id;
 import blackboard.persist.PersistenceException;
 import blackboard.persist.course.CourseDbLoader;
+import blackboard.platform.security.Entitlement;
+import blackboard.platform.security.SecurityUtil;
 import com.alltheducks.bbws.model.CourseDto;
 import com.alltheducks.bbws.util.BbCourseHelper;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,11 +29,25 @@ public class UsersResource {
     @GET
     @Path("{userId}/courses")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CourseDto> getCoursesForUser(@PathParam("userId") String userId) throws PersistenceException {
+    public List<CourseDto> getCoursesForUser(@PathParam("userId") String userId, @QueryParam("entitlement") @DefaultValue("") String entitlement) throws PersistenceException {
 
-        List<Course> courses = courseDbLoader.loadByUserId(Id.generateId(User.DATA_TYPE, userId));
-        return  BbCourseHelper.convertBbCoursesToCourseDtos(courses);
+        Id bbUserId = Id.generateId(User.DATA_TYPE, userId);
+        List<Course> courses = courseDbLoader.loadByUserId(bbUserId);
 
+        if (entitlement.isEmpty()) {
+            // no entitlement specified, return all the courses
+            return BbCourseHelper.convertBbCoursesToCourseDtos(courses);
+        } else {
+            // otherwise, filter courses based on the users entitlement
+            Entitlement bbEntitlement = new Entitlement(entitlement);
+            List<Course> filteredCourses = new ArrayList<>();
+            for (Course course : courses) {
+                if (SecurityUtil.userHasEntitlement(bbUserId, course.getId(), bbEntitlement)) {
+                    filteredCourses.add(course);
+                }
+            }
+            return BbCourseHelper.convertBbCoursesToCourseDtos(filteredCourses);
+        }
     }
 
 }
