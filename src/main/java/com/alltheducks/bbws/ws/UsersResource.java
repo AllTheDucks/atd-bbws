@@ -5,6 +5,7 @@ import blackboard.data.user.User;
 import blackboard.persist.Id;
 import blackboard.persist.PersistenceException;
 import blackboard.persist.course.CourseDbLoader;
+import blackboard.persist.user.UserDbLoader;
 import blackboard.platform.security.Entitlement;
 import blackboard.platform.security.SecurityUtil;
 import com.alltheducks.bbws.model.CourseDto;
@@ -25,13 +26,17 @@ public class UsersResource {
 
     @Inject
     private CourseDbLoader courseDbLoader;
+    @Inject
+    private UserDbLoader userDbLoader;
 
     @GET
-    @Path("{userId}/courses")
+    @Path("{username}/courses")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CourseDto> getCoursesForUser(@PathParam("userId") String userId, @QueryParam("entitlement") @DefaultValue("") String entitlement) throws PersistenceException {
+    public List<CourseDto> getCoursesForUser(@PathParam("username") String username, @QueryParam("entitlement") @DefaultValue("") String entitlement) throws PersistenceException {
 
-        Id bbUserId = Id.generateId(User.DATA_TYPE, userId);
+        User bbUser = userDbLoader.loadByUserName(username);
+        Id bbUserId = bbUser.getId();
+
         List<Course> courses = courseDbLoader.loadByUserId(bbUserId);
 
         if (entitlement.isEmpty()) {
