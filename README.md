@@ -202,12 +202,12 @@ curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_cours
 
 ### Get all Courses for a User
 
-**GET** `/users/{userId}/courses`
-* `userId` is the value stored in the `USERS_PK1` column in the DB.
+**GET** `/users/{username}/courses`
+* `username` is the value stored in the `USER_ID` column in the DB.
 
 curl Example
 ```` shell
-curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/users/65/courses
+curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/users/administrator/courses
 ````
 
 #### Example Response
