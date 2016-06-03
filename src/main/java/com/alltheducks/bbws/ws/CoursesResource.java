@@ -155,7 +155,7 @@ public class CoursesResource {
 
             //TODO Check that the gradableItem actually belongs to this course.
             GradableItem gradableItem = gradableItemDAO.loadById(assessmentId);
-            if (!courseId.equals(gradableItem.getCourseId())) {
+            if (!bbCourse.getId().equals(gradableItem.getCourseId())) {
                 throw new WebApplicationException("Invalid IDs in request.", 400);
             }
 
