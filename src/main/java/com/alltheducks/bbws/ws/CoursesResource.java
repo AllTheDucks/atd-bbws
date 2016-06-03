@@ -166,7 +166,14 @@ public class CoursesResource {
                 //TODO This is probably not very efficient. Fix it.
                 User user = userDbLoader.loadUserByCourseMembership(grade.getCourseUserId());
                 MarkDto mark = new MarkDto();
-                mark.setValue(grade.getGrade(gradableItem.getAggregationModel()));
+                String gradeVal = grade.getGrade(gradableItem.getAggregationModel());
+                double scoreVal = 0;
+                try {
+                    scoreVal = Double.parseDouble(gradeVal);
+                } catch (NumberFormatException e) {
+                    // Do Nothing for now...
+                }
+                mark.setValue(gradableItem.getSchemaValue(scoreVal));
                 mark.setExternalUserKey(user.getUserName());
                 marks.add(mark);
             }
