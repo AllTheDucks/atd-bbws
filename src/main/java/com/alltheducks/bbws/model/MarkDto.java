@@ -1,22 +1,19 @@
 package com.alltheducks.bbws.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Created by Wiley Fuller on 5/03/15.
  * Copyright All the Ducks Pty. Ltd.
  */
 public class MarkDto {
-    private String username;
+    private String externalUserKey;
     private String value;
 
-    public String getUsername() {
-        return username;
+    public String getExternalUserKey() {
+        return externalUserKey;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setExternalUserKey(String externalUserKey) {
+        this.externalUserKey = externalUserKey;
     }
 
     public String getValue() {

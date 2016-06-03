@@ -167,7 +167,7 @@ public class CoursesResource {
                 User user = userDbLoader.loadUserByCourseMembership(grade.getCourseUserId());
                 MarkDto mark = new MarkDto();
                 mark.setValue(grade.getGrade(gradableItem.getAggregationModel()));
-                mark.setUsername(user.getUserName());
+                mark.setExternalUserKey(user.getUserName());
                 marks.add(mark);
             }
 
