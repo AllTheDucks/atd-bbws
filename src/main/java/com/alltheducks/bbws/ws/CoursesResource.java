@@ -167,13 +167,14 @@ public class CoursesResource {
                 User user = userDbLoader.loadUserByCourseMembership(grade.getCourseUserId());
                 MarkDto mark = new MarkDto();
                 String gradeVal = grade.getGrade(gradableItem.getAggregationModel());
-                double scoreVal = 0;
+                Double scoreVal = null;
                 try {
                     scoreVal = Double.parseDouble(gradeVal);
                 } catch (NumberFormatException e) {
                     // Do Nothing for now...
                 }
-                mark.setValue(gradableItem.getSchemaValue(scoreVal));
+                mark.setText(gradableItem.getSchemaValue(scoreVal));
+                mark.setScore(scoreVal);
                 mark.setExternalUserKey(user.getUserName());
                 marks.add(mark);
             }

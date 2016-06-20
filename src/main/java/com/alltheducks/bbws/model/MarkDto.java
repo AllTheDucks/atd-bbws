@@ -6,7 +6,8 @@ package com.alltheducks.bbws.model;
  */
 public class MarkDto {
     private String externalUserKey;
-    private String value;
+    private String text;
+    private Double score;
 
     public String getExternalUserKey() {
         return externalUserKey;
@@ -16,11 +17,19 @@ public class MarkDto {
         this.externalUserKey = externalUserKey;
     }
 
-    public String getValue() {
-        return value;
+    public String getText() {
+        return text;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }
