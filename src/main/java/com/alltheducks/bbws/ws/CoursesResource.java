@@ -2,6 +2,7 @@ package com.alltheducks.bbws.ws;
 
 import blackboard.data.course.Course;
 import blackboard.data.course.CourseCourse;
+import blackboard.data.course.CourseMembership;
 import blackboard.data.user.User;
 import blackboard.persist.Id;
 import blackboard.persist.KeyNotFoundException;
@@ -175,7 +176,8 @@ public class CoursesResource {
                 }
                 mark.setText(gradableItem.getSchemaValue(scoreVal));
                 mark.setScore(scoreVal);
-                mark.setExternalUserKey(user.getUserName());
+                //TODO external key needs to be configurable.
+                mark.setExternalUserKey(user.getStudentId());
                 marks.add(mark);
             }
 
@@ -205,8 +207,16 @@ public class CoursesResource {
     private AssessmentItemDto convertGradableItemToAssessmentDto(GradableItem item) throws PersistenceException {
         AssessmentItemDto assessmentItem = new AssessmentItemDto();
         assessmentItem.setId(item.getId().getExternalString());
-        assessmentItem.setName(item.getDisplayTitle());
         assessmentItem.setInternalName(item.getTitle());
+        String displayTitle = item.getDisplayTitle();
+        String name;
+        if (displayTitle == null || displayTitle.trim().isEmpty()) {
+            name = item.getTitle();
+        } else {
+            name = item.getDisplayTitle();
+        }
+
+        assessmentItem.setName(name);
         assessmentItem.setPointsPossible(item.getPoints());
         assessmentItem.setUserCreatedAssessment(item.isUserCreatedColumn());
 
