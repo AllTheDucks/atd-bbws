@@ -141,7 +141,7 @@ curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/other_test_co
 
 ```` json
 {
-id: "_5_1",
+"id": "_5_1",
 "courseId": "other_test_course",
 "externalId": "other_test_course",
 "title": "My Other Test Course",
