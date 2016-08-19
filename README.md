@@ -125,6 +125,35 @@ curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/my_test_cours
 
 ````
 
+#### Get a single Course (extended info)
+
+**GET** `/courses/{courseId}/extended`
+
+Currently also provides availability information (both GUI-set Availability and row_status)
+
+* `courseId` is the value stored in the `COURSE_ID` column in the DB.
+
+curl Example
+```` shell
+curl https://yourbbinstall.edu/webapps/atd-bbws-BBLEARN/ws/courses/other_test_course/extended
+````
+#### Example Response
+
+```` json
+{
+id: "_5_1",
+courseId: "other_test_course",
+externalId: "other_test_course",
+title: "My Other Test Course",
+children: null,
+rowStatus: "0",
+isAvailable: true
+}
+
+
+````
+
+
 ### Get all Assessments for a course
 
 **GET** `/courses/{courseId}/gradebook/assessments`

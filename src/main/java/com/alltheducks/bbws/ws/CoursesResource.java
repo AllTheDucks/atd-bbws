@@ -13,6 +13,7 @@ import blackboard.platform.gradebook2.*;
 import blackboard.platform.gradebook2.impl.*;
 import com.alltheducks.bbws.model.AssessmentItemDto;
 import com.alltheducks.bbws.model.CourseDto;
+import com.alltheducks.bbws.model.CourseExtendedDto;
 import com.alltheducks.bbws.model.MarkDto;
 import com.alltheducks.bbws.security.RequiresAuthentication;
 import com.alltheducks.bbws.util.BbCourseHelper;
@@ -62,6 +63,21 @@ public class CoursesResource {
     }
 
     @GET
+    @Produces("application/json")
+    public List<CourseExtendedDto> listCoursesExtended() {
+        List<CourseExtendedDto> courses = new ArrayList<CourseExtendedDto>();
+        try {
+            List<Course> bbCourses = courseDbLoader.loadAllCourses();
+            courses = BbCourseHelper.convertBbCoursesToCourseExtendedDtos(bbCourses);
+        } catch (PersistenceException ex) {
+            logger.error("Error while retrieving courses", ex);
+            throw new WebApplicationException("Error retrieving Courses", 500);
+        }
+
+        return courses;
+    }
+
+    @GET
     @Path("/{courseId}")
     @Produces("application/json")
     public CourseDto getCourseInfo(@PathParam("courseId") String courseId) {
@@ -71,6 +87,37 @@ public class CoursesResource {
             Course bbCourse = courseDbLoader.loadByCourseId(courseId);
             List<CourseCourse> children = courseCourseDbLoader.loadByParentId(bbCourse.getId());
             course = BbCourseHelper.convertBbCourseToCourseDto(bbCourse);
+            if (children != null && !children.isEmpty()) {
+                course.setChildren(new ArrayList<CourseDto>());
+                for (CourseCourse childCc : children) {
+                    Course childBbCourse = courseDbLoader.loadById(childCc.getChildCourseId());
+                    CourseDto childCourse = BbCourseHelper.convertBbCourseToCourseDto(childBbCourse);
+                    course.getChildren().add(childCourse);
+                }
+            }
+
+        } catch (KeyNotFoundException ex) {
+            logger.debug(String.format("No Course with CourseId {} found.", courseId));
+            throw new WebApplicationException(String.format("No Course with CourseId %s found.", courseId), 404);
+        } catch (PersistenceException ex) {
+            logger.error("Error while retrieving courses", ex);
+            throw new WebApplicationException("Error retrieving Courses", 500);
+        }
+
+        return course;
+    }
+
+
+    @GET
+    @Path("/{courseId}/extended")
+    @Produces("application/json")
+    public CourseExtendedDto getCourseExtendedInfo(@PathParam("courseId") String courseId) {
+        CourseExtendedDto course;
+
+        try {
+            Course bbCourse = courseDbLoader.loadByCourseId(courseId);
+            List<CourseCourse> children = courseCourseDbLoader.loadByParentId(bbCourse.getId());
+            course = BbCourseHelper.convertBbCourseToCourseExtendedDto(bbCourse);
             if (children != null && !children.isEmpty()) {
                 course.setChildren(new ArrayList<CourseDto>());
                 for (CourseCourse childCc : children) {
